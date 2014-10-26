@@ -11,7 +11,9 @@ Each data point is for a variable (such as tBodyAcc-mean()-X), a person (of whic
 
 Only those variables which contain mean() or std() are extracted to construct a table of person and activity versus variable. 
 
-The data is aggregated by person/activity and the mean of each group calculated.
+Part 4 of the assignment requires activity name and person identifier, versus variable name.
+
+For part 5 the data is aggregated by person/activity and the mean of each group calculated.
 
 The code book describing the variables, data, and transformations is available [CodeBook.md](./CodeBook.md).
 
