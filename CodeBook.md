@@ -15,16 +15,20 @@ The following variables are loaded from the CI HAR Dataset
 
 Only the variable names (features) containing mean() and std(0 are required.
 Use grep to find these and tidy up the resulting labels by removing - , ) and (
-The tidy lables are held in actsLabels.
+The tidy lables are held in featsLabels.
 
-The activity and person identifires are read into vectors to be inserted as first two columns of final table. 
-These are first extracted to activity..., person..., where ... = test or train and then combined into
+The activity and person identifiers are read into vectors to be inserted as first two columns of final table. 
+These are first extracted to activity*, person*, where * = test or train and then combined into
 activity and person
 
-Similarly the measurements are read into vars... and then combined into vars
+Similarly the measurements are read into vars* and then combined into vars
+The activity column names on vars are then set using featsLabels. 
 
-The column names are then set using actsLabels. 
-vars is then aggregated into aggdata by activity and person using FUN=mean
+For part 4 of the assignment:-
+activity identifiers are converted to description in activityDesc and varsP4 is created as required.
 
-Column names person and activity are added to the the two new left hand columns
-and the date is written to file with row.names = False
+
+For part 5 of the assignment:-
+vars is aggregated into aggdata by activityDesc and person using FUN=mean
+Column names activity and person are set and the data writtne to file with row.names =F
+

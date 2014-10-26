@@ -1,10 +1,10 @@
 ####Coursera Getting and Cleaning Data. Project
 
 ##Set variable names in actsLabels, find mean() and std(),extract them, remove -,),( 
-acts <- read.delim("features.txt",header=F,sep=" ")
-actsCols<-grep("mean\\(\\)|std\\(\\)",acts[,2])
-actsLabels <- acts[actsCols,]
-actsLabels<-gsub("[-)(]", "", actsLabels[,2])
+feats <- read.delim("features.txt",header=F,sep=" ")
+featsCols<-grep("mean\\(\\)|std\\(\\)",feats[,2])
+featsLabels <- feats[featsCols,]
+featsLabels<-gsub("[-)(]", "", featsLabels[,2])
 
 
 ##Get the test and train activity and person vectors
@@ -18,20 +18,20 @@ activity <- rbind(activityTest,activityTrain)
 person <- rbind(personTest,personTrain)
 
 ##Get the test and train variables
-varsTest <- read.table("test/X_test.txt",header=F)[,actsCols]
-varsTrain <- read.table("train/X_train.txt",header=F)[,actsCols]
+varsTest <- read.table("test/X_test.txt",header=F)[,featsCols]
+varsTrain <- read.table("train/X_train.txt",header=F)[,featsCols]
 
 ##Combine the test and train vars
 vars <- rbind(varsTest,varsTrain)
-colnames(vars) <- actsLabels
+colnames(vars) <- featsLabels
 
-##>>>> Satisfy part 4 of the question <<<<
-varsP4 <- cbind(activity,vars)
-
-##Translate the activity numbers to descriptions
+##For part 4 of the question translate activity get activity descriptions
 activityLabels <-  read.table("activity_labels.txt",header=F,as.is=T)[,2]
-#activity <-  activityLabels[activity[,1]]
 activityDesc<- data.frame(activityLabels[activity[,1]])
+varsP4 <- cbind(activityDesc,vars)
+colnames(varsP4)[1]<-"activity"
+
+##For part 5 aggegate the data and find mean of each group then write to file using row.names=F
 aggdata<-aggregate(varsP4[,-1], by=c(activityDesc,person), FUN=mean, na.rm=TRUE)
 colnames(aggdata)[c(1,2)] <- c("activity","person")
 write.table(aggdata,file="report.csv",sep=",",col.names = T, row.names = F)
