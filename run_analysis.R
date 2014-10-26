@@ -34,4 +34,4 @@ colnames(varsP4)[1]<-"activity"
 ##For part 5 aggegate the data and find mean of each group then write to file using row.names=F
 aggdata<-aggregate(varsP4[,-1], by=c(activityDesc,person), FUN=mean, na.rm=TRUE)
 colnames(aggdata)[c(1,2)] <- c("activity","person")
-write.table(aggdata,file="report.csv",sep=",",col.names = T, row.names = F)
+write.table(aggdata,file="report.csv",sep=" ",col.names = T, row.names = F)
